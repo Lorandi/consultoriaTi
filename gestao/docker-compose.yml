@@ -1,0 +1,36 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  db:
+    image: library/postgres:13
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 123
+      POSTGRES_USER: "postgres"
+      POSTGRES_DB: "gestao"
+    ports:
+      - 5442:5432
+    volumes:
+      -  pg-data:/var/lib/postgresql/data
+
+  rabbitMq:
+    container_name: service-rabbitmq-gestao
+    image: rabbitmq:3.9.7-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 45806:15672
+    restart: always
+    environment:
+      - RABBITMQ_USER=guest
+      - RABBITMQ_PASSWORD=guest
+    networks:
+      - rabbitmq-service-net
+
+networks:
+  rabbitmq-service-net: { }
+
+volumes:
+  pg-data:
