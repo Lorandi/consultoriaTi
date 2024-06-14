@@ -6,6 +6,7 @@ import com.consultoriaTi.gestao.dto.ProfessionalDTO;
 import com.consultoriaTi.gestao.dto.ProfessionalUpdateDTO;
 import com.consultoriaTi.gestao.enums.ProfessionalStatusEnum;
 import com.consultoriaTi.gestao.service.ProfessionalService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,9 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,7 +31,7 @@ public class ProfessionalResource {
     private final ProfessionalService service;
 
     @GetMapping("/{id}")
-    @Operation(summary = "Search elector by id",
+    @Operation(summary = "Search Professional by id",
             responses = {@ApiResponse(responseCode = "200", description = "Resource successfully retrieved",
                     content = @Content(schema = @Schema(implementation = ProfessionalDTO.class)))})
     public ProfessionalDTO findById(@Valid @PathVariable Long id) {
@@ -49,14 +47,14 @@ public class ProfessionalResource {
     }
 
     @PutMapping
-    @Operation(summary = "Update elector by id",
+    @Operation(summary = "Update Professional by id",
             responses = {@ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ProfessionalDTO.class)))})
     public ProfessionalDTO update(@Valid @RequestBody ProfessionalUpdateDTO updateDTO) {
         return service.update(updateDTO);
     }
 
     @GetMapping
-    @Operation(summary = "Find all electors",
+    @Operation(summary = "Find all Professionals",
             responses = {@ApiResponse(responseCode = "200",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ProfessionalDTO.class))))})
     public List<ProfessionalDTO> findAll(@RequestParam(required = false) Optional<String> name,
@@ -67,7 +65,7 @@ public class ProfessionalResource {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete elector by id",
+    @Operation(summary = "Delete Professional by id",
             responses = {@ApiResponse(responseCode = "204", description = "Elector successfully deleted")})
     public void delete(@PathVariable Long id) {
         service.delete(id);

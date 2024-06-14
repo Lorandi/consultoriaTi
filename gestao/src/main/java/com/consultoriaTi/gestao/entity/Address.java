@@ -1,12 +1,7 @@
 package com.consultoriaTi.gestao.entity;
 
-import com.consultoriaTi.gestao.enums.ProfessionalStatusEnum;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.math.BigDecimal;
-
-import static jakarta.persistence.EnumType.STRING;
 
 @Entity
 @Data

@@ -6,9 +6,13 @@ import com.consultoriaTi.gestao.dto.ProfessionalDTO;
 import com.consultoriaTi.gestao.dto.ProfessionalUpdateDTO;
 import com.consultoriaTi.gestao.entity.Professional;
 import com.consultoriaTi.gestao.enums.ProfessionalStatusEnum;
+import com.consultoriaTi.gestao.helper.JsonUtils;
 import com.consultoriaTi.gestao.helper.MessageHelper;
 import com.consultoriaTi.gestao.repository.ProfessionalRepository;
 import com.consultoriaTi.gestao.repository.spec.ProfessionalSpecification;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -43,6 +47,8 @@ public class ProfessionalService {
                 .withProfessionalStatus(ProfessionalStatusEnum.NOT_ALLOCATED)
                 .withAddressId(addressDTO != null ? addressDTO.id() : null));
 
+        JsonUtils.logObject(log,"Professional created", professional);
+
         return professionalMapper.buildDTO(professional).withAddress(addressDTO);
     }
 
@@ -58,12 +64,16 @@ public class ProfessionalService {
                     .withId(professional.getAddressId()));
         }
 
-        return professionalMapper.buildDTO(repository.save(professional.withName(updateDTO.name())
+        ProfessionalDTO professionalDTO = professionalMapper.buildDTO(repository.save(professional.withName(updateDTO.name())
                 .withCorporateEmail(updateDTO.corporateEmail())
                 .withPhone(updateDTO.phone())
                 .withRemuneration(updateDTO.remuneration())
                 .withAddressId(addressDTO != null ? addressDTO.id() : null)
         )).withAddress(addressDTO);
+
+        JsonUtils.logObject(log,"Professional updated",  professionalDTO);
+
+        return professionalDTO;
     }
 
     public Professional findById(final Long id) {
@@ -87,6 +97,7 @@ public class ProfessionalService {
     public void delete(final Long id) {
         Professional professional = findById(id);
         repository.delete(professional);
+        JsonUtils.logObject(log,"Professional deleted:", professional);
     }
 
     public List<ProfessionalDTO> findAll(final Optional<String> name,
@@ -103,5 +114,9 @@ public class ProfessionalService {
                 })
                 .sorted(Comparator.comparing(ProfessionalDTO::id))
                 .collect(Collectors.toList());
+    }
+
+    public void save(final Professional professional) {
+        repository.save(professional);
     }
 }

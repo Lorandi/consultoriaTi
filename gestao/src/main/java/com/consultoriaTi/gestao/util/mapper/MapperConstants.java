@@ -9,4 +9,6 @@ public class MapperConstants {
 
     public static final ProfessionalMapper professionalMapper = Mappers.getMapper(ProfessionalMapper.class);
     public static final AddressMapper addressMapper = Mappers.getMapper(AddressMapper.class);
+    public static final ClientMapper clientMapper = Mappers.getMapper(ClientMapper.class);
+    public static final AllocationMapper allocationMapper = Mappers.getMapper(AllocationMapper.class);
 }

@@ -8,17 +8,15 @@ import lombok.Getter;
 public enum ErrorCodeEnum {
 
     ERROR_GENERIC_EXCEPTION("error.generic.exception"),
-    ERROR_CPF_ALREADY_USED("error.cpf.already.used"),
-    ERROR_ELECTOR_NOT_FOUND("error.elector.not.found"),
-    ERROR_INVALID_CPF("error.invalid.cpf"),
     ERROR_DATE_FORMAT("error.date.format"),
-    ERROR_SURVEY_NOT_FOUND("error.survey.not.found"),
-    ERROR_VOTE_NOT_FOUND("error.vote.not.found"),
-    ERROR_ELECTOR_UNABLE_TO_VOTE("error.elector.unable.to.vote"),
-    ERROR_ELECTOR_ALREADY_VOTED_FOR_THIS_SURVEY("error.elector.already.voted.for.this.survey"),
-    ERROR_THIS_SURVEY_IS_EXPIRED("error.this.survey.is.expired"),
     ERROR_PROFESSIONAL_NOT_FOUND("error.professional.not.found"),
-    ERROR_ADDRESS_NOT_FOUND("error.address.not.found");
+    ERROR_ADDRESS_NOT_FOUND("error.address.not.found"),
+    ERROR_CLIENT_NOT_FOUND("error.client.not.found"),
+    ERROR_PROFESSIONAL_ALREADY_ALLOCATED_ON_THIS_CLIENT("error.professional.already.allocated.on.this.client"),
+    ERROR_ALLOCATION_END_DATE_BEFORE_ALLOCATION_START_DATE("error.allocation.end.date.before.allocation.start.date"),
+    ERROR_ALLOCATION_DATE_END_IS_TODAY("error.allocation.date.end.is.today"),
+    ERROR_ALLOCATION_NOT_FOUND("error.allocation.not.found"),
+    ERROR_ALLOCATION_NOT_FOUND_FOR_THIS_PROFESSIONAL("error.allocation.not.found.for.this.professional"),;
 
     private final String messageKey;
 }
