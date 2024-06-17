@@ -10,6 +10,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
+import java.util.Optional;
+
 import static com.consultoriaTi.gestao.exception.ErrorCodeEnum.ERROR_CLIENT_NOT_FOUND;
 import static com.consultoriaTi.gestao.util.mapper.MapperConstants.clientMapper;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -39,4 +42,7 @@ public class ClientService {
         return clientMapper.buildClientDTO(findByClientId(id));
     }
 
+    public List<ClientDTO> findAll() {
+        return clientMapper.buildClientDTOList(repository.findAll());
+    }
 }

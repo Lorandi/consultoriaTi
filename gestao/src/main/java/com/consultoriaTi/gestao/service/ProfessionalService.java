@@ -57,7 +57,7 @@ public class ProfessionalService {
 
         AddressDTO addressDTO = null;
 
-        if (professional.getId() == null && updateDTO.address() != null) {
+        if (professional.getAddressId() == null && updateDTO.address() != null) {
             addressDTO = addressService.create(updateDTO.address());
         } else if (updateDTO.address() != null) {
             addressDTO = addressService.update(addressMapper.buildAddressUpdateDTO(updateDTO.address())

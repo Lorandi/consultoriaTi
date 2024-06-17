@@ -1,6 +1,7 @@
 package com.consultoriaTi.gestao.service;
 
 import com.consultoriaTi.gestao.entity.Allocation;
+import com.consultoriaTi.gestao.entity.Professional;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import static com.consultoriaTi.gestao.enums.AllocationStatusEnum.ACTIVE;
+import static com.consultoriaTi.gestao.enums.AllocationStatusEnum.FINISHED;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +20,7 @@ import static com.consultoriaTi.gestao.enums.AllocationStatusEnum.ACTIVE;
 @EnableScheduling
 public class ScheduledTaskService {
     private final AllocationService allocationService;
+    private final ProfessionalService professionalService;
 
     @PostConstruct
     public void executeTaskOnStartup() {
@@ -27,19 +30,16 @@ public class ScheduledTaskService {
     @Scheduled(cron = "0 0 8 * * *", zone = "America/Sao_Paulo")
     public void updateAllocationStatus() {
         List<Allocation> listAllocations = allocationService.findAllAllocationsToUpdateAllocationStatusTodayToActive();
-        listAllocations.forEach(allocation -> allocationService.saveAllocation(allocation.withAllocationStatus(ACTIVE)));
+        listAllocations.forEach(allocation ->{
+            allocationService.saveAllocation(allocation.withAllocationStatus(ACTIVE));
+            Professional professional = professionalService.findById(allocation.getProfessionalId());
+            allocationService.updateProfessionalStatus(professional, ACTIVE);
+        });
+        List<Allocation> listAllocationsFinished = allocationService.findAllAllocationsToUpdateAllocationStatusTodayToFinished();
+        listAllocationsFinished.forEach(allocation -> {
+            allocationService.saveAllocation(allocation.withAllocationStatus(FINISHED));
+            Professional professional = professionalService.findById(allocation.getProfessionalId());
+            allocationService.updateProfessionalStatusIfNoActiveAllocations(professional);
+        });
     }
-
-
-//    private final SurveyService surveyService;
-//    private final MessengerPublisherService messengerService;
-//    private final VoteService voteService;
-//    @Scheduled(cron = "1 * * * * *", zone = "America/Sao_Paulo")
-//    public void updateSurveyStatus() {
-//        List<Survey> listSurveys = surveyService.findAllSurveysToUpdateSurveyStatusToClosed();
-//        for (Survey survey : listSurveys) {
-//            surveyService.save(survey.withStatus(SurveyStatusEnum.CLOSED));
-//            messengerService.directPublisher(voteService.surveyResult(survey.getId()));
-//        }
-//    }
 }

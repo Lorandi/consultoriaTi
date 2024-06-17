@@ -7,6 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
+import java.util.List;
+
 @Mapper
 public interface ClientMapper {
 
@@ -14,4 +16,6 @@ public interface ClientMapper {
 
     @Mapping(target = "clientId", source = "clientId")
     ClientDTO buildClientDTO(Client client);
+
+    List<ClientDTO> buildClientDTOList(List<Client> clients);
 }

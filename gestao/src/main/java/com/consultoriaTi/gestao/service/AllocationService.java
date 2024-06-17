@@ -24,9 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.consultoriaTi.gestao.enums.AllocationStatusEnum.ACTIVE;
-import static com.consultoriaTi.gestao.enums.AllocationStatusEnum.SCHEDULED;
+import static com.consultoriaTi.gestao.enums.AllocationStatusEnum.*;
 import static com.consultoriaTi.gestao.enums.ProfessionalStatusEnum.ALLOCATED;
+import static com.consultoriaTi.gestao.enums.ProfessionalStatusEnum.NOT_ALLOCATED;
 import static com.consultoriaTi.gestao.exception.ErrorCodeEnum.*;
 import static com.consultoriaTi.gestao.util.mapper.MapperConstants.allocationMapper;
 import static java.lang.Boolean.FALSE;
@@ -57,10 +57,12 @@ public class AllocationService {
         AllocationStatusEnum allocationStatus = checkAllocationStatusBasedOnDates(
                 createDTO.getAllocationStartDate(), createDTO.getAllocationEndDate());
 
+        AllocationDTO allocationDTO =  allocationMapper.buildAllocationDTO(repository.save(
+                allocationMapper.buildAllocation(createDTO).withAllocationStatus(allocationStatus)));
+
         updateProfessionalStatus(professional, allocationStatus);
 
-        return allocationMapper.buildAllocationDTO(repository.save(allocationMapper.buildAllocation(createDTO)
-                .withAllocationStatus(allocationStatus)));
+        return allocationDTO;
     }
 
     @Transactional
@@ -71,16 +73,17 @@ public class AllocationService {
         AllocationStatusEnum allocationStatus = checkAllocationStatusBasedOnDates(
                 updateDTO.getAllocationStartDate(), updateDTO.getAllocationEndDate());
 
-        updateProfessionalStatus(professional, allocationStatus);
-
-        var updatedAllocation = allocationMapper.buildAllocationDTO(repository.save(allocation
+        AllocationDTO allocationDTO =  allocationMapper.buildAllocationDTO(repository.save(allocation
                 .withRole(updateDTO.getRole())
                 .withValuePerHour(updateDTO.getValuePerHour())
                 .withAllocationStartDate(updateDTO.getAllocationStartDate())
                 .withAllocationEndDate(updateDTO.getAllocationEndDate())
+                .withAllocationStatus(allocationStatus)
         ));
 
-        return updatedAllocation;
+        updateProfessionalStatus(professional, allocationStatus);
+
+        return allocationDTO;
     }
 
     private void checkProfessionalAllocations(final Long professionalId, final Long clientId) {
@@ -98,13 +101,12 @@ public class AllocationService {
         if (nonNull(allocationEndDate) && allocationEndDate.isBefore(allocationStartDate))
             throw new ResponseStatusException(BAD_REQUEST, messageHelper.get(ERROR_ALLOCATION_END_DATE_BEFORE_ALLOCATION_START_DATE));
 
-        if (nonNull(allocationEndDate) && now().isAfter(allocationEndDate))
-            throw new ResponseStatusException(BAD_REQUEST, messageHelper.get(ERROR_ALLOCATION_DATE_END_IS_TODAY));
-
-        if (allocationStartDate.isAfter(now()))
-            return SCHEDULED;
-        else if (now().isAfter(allocationStartDate) || now().isEqual(allocationStartDate))
-            return ACTIVE;
+        if(nonNull(allocationStartDate)){
+            if (now().isBefore(allocationStartDate))
+                return SCHEDULED;
+            else if (now().isAfter(allocationStartDate) || now().isEqual(allocationStartDate))
+                return ACTIVE;
+        }
 
         return null;
     }
@@ -113,12 +115,6 @@ public class AllocationService {
                                        final Pageable pageable) {
         return repository.findAll(allocationSpecification, pageable).stream().map(allocationMapper::buildAllocationDTO)
                 .collect(Collectors.toList());
-    }
-
-    public Allocation findByProfessionalId(Long professionalId) {
-        return repository.findByProfessionalId(professionalId)
-                .orElseThrow(() -> new ResponseStatusException(NOT_FOUND,
-                        messageHelper.get(ERROR_ALLOCATION_NOT_FOUND_FOR_THIS_PROFESSIONAL, professionalId)));
     }
 
     public Allocation findById(final Long id) {
@@ -131,13 +127,19 @@ public class AllocationService {
         return allocationMapper.buildAllocationDTO(findById(id));
     }
 
-
     public void updateProfessionalStatus(Professional professional, AllocationStatusEnum allocationStatus) {
-        if (nonNull(allocationStatus) && allocationStatus.equals(ACTIVE)) {
+        if (allocationStatus == null) return;
+
+        if (allocationStatus.equals(ACTIVE)) {
             professional.setProfessionalStatus(ALLOCATED);
-            professionalService.save(professional);
+        } else if (allocationStatus.equals(FINISHED)) {
+            updateProfessionalStatusIfNoActiveAllocations(professional);
         }
+
+        professionalService.save(professional);
     }
+
+
 
     public void saveAllocation(Allocation allocation) {
         repository.save(allocation);
@@ -145,6 +147,26 @@ public class AllocationService {
 
     public List<Allocation> findAllAllocationsToUpdateAllocationStatusTodayToActive() {
         return repository.findAllAllocationsToUpdateAllocationStatusTodayToActive();
+    }
+
+    public List<Allocation> findAllAllocationsToUpdateAllocationStatusTodayToFinished() {
+        return repository.findAllAllocationsToUpdateAllocationStatusTodayToFinished();
+    }
+
+    public void delete(Long id) {
+        Allocation allocation = findById(id);
+        repository.delete(allocation);
+    }
+
+    public void updateProfessionalStatusIfNoActiveAllocations(Professional professional){
+        if (findAllAllocationsActiveForThisProfessional(professional.getId()).isEmpty()) {
+            professional.setProfessionalStatus(NOT_ALLOCATED);
+            professionalService.save(professional);
+        }
+    }
+
+    public List<Allocation> findAllAllocationsActiveForThisProfessional(final Long professionalId) {
+        return repository.findAllAllocationWithStatusActiveForThisProfessional(professionalId);
     }
 
 }
