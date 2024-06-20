@@ -7,6 +7,8 @@ import com.consultoriaTi.gestao.helper.MessageHelper;
 import com.consultoriaTi.gestao.repository.ClientRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -42,7 +44,8 @@ public class ClientService {
         return clientMapper.buildClientDTO(findByClientId(id));
     }
 
-    public List<ClientDTO> findAll() {
-        return clientMapper.buildClientDTOList(repository.findAll());
+    public Page<ClientDTO> findAll(final Pageable pageable) {
+        return repository.findAll(pageable).map(clientMapper::buildClientDTO);
+
     }
 }

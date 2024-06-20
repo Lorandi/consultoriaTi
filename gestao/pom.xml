@@ -28,6 +28,9 @@
 		<rabbitmq.version>5.16.0</rabbitmq.version>
 		<json.version>20230618</json.version>
 		<spring.rabbit.version>3.0.7</spring.rabbit.version>
+		<flyway-core-version>9.8.1</flyway-core-version>
+		<aws-java-sdk.version>1.11.960</aws-java-sdk.version>
+		<h2database.version>2.2.224</h2database.version>
 	</properties>
 
 	<dependencies>
@@ -122,6 +125,30 @@
 			<artifactId>json</artifactId>
 			<version>${json.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<version>${flyway-core-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.amazonaws</groupId>
+			<artifactId>aws-java-sdk-s3</artifactId>
+			<version>${aws-java-sdk.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>${h2database.version}</version>
+			<scope>test</scope>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>com.amazonaws</groupId>-->
+<!--			<artifactId>aws-java-sdk-ses</artifactId>-->
+<!--			<version>${aws-java-sdk.version}</version>-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>org.springframework.amqp</groupId>

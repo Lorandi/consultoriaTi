@@ -11,10 +11,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,7 +38,10 @@ public class ClientResource {
     @Operation(summary = "Find all Clients",
             responses = {@ApiResponse(responseCode = "200",
                     content = @Content(array = @ArraySchema(schema = @Schema(implementation = ClientDTO.class))))})
-    public List<ClientDTO> findAll() {
-        return service.findAll();
+    public Page<ClientDTO> findAll(@RequestParam(defaultValue = "0") Integer page,
+                                   @RequestParam(defaultValue = "10") Integer size,
+                                   @RequestParam(defaultValue = "clientId") String sort,
+                                   @RequestParam(defaultValue = "DESC") Sort.Direction direction) {
+        return service.findAll(PageRequest.of(page, size, Sort.by(direction, sort)));
     }
 }
