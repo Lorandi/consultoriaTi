@@ -11,12 +11,12 @@ services:
       POSTGRES_USER: "postgres"
       POSTGRES_DB: "gestao"
     ports:
-      - 5442:5432
+      - 5432:5432
     volumes:
       -  pg-data:/var/lib/postgresql/data
 
   rabbitMq:
-    container_name: service-rabbitmq-gestao
+    container_name: service-rabbitmq-consultoria
     image: rabbitmq:3.9.7-management
     ports:
       - 5672:5672
