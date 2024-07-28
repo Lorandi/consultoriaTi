@@ -66,7 +66,7 @@ public class ProfessionalResource {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Professional by id",
-            responses = {@ApiResponse(responseCode = "204", description = "Elector successfully deleted")})
+            responses = {@ApiResponse(responseCode = "204", description = "Professional successfully deleted")})
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
