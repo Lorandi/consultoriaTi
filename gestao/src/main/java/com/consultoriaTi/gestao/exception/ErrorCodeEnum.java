@@ -16,7 +16,9 @@ public enum ErrorCodeEnum {
     ERROR_ALLOCATION_END_DATE_BEFORE_ALLOCATION_START_DATE("error.allocation.end.date.before.allocation.start.date"),
     ERROR_ALLOCATION_DATE_END_IS_TODAY("error.allocation.date.end.is.today"),
     ERROR_ALLOCATION_NOT_FOUND("error.allocation.not.found"),
-    ERROR_ALLOCATION_NOT_FOUND_FOR_THIS_PROFESSIONAL("error.allocation.not.found.for.this.professional"),;
+    ERROR_ALLOCATION_NOT_FOUND_FOR_THIS_PROFESSIONAL("error.allocation.not.found.for.this.professional"),
+    ERROR_DEALLOCATION_NOT_FOUND("error.deallocation.not.found"),
+    ERROR_ALLOCATION_STATUS_NOT_ACTIVE("error.allocation.status.not.active"),;
 
     private final String messageKey;
 }

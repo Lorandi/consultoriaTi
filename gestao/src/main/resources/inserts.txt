@@ -1,122 +1,31 @@
-insert into elector (cpf, status) values (72831502079, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (29584761068, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (53698724015, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (84162903507, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (16250743980, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (97831462509, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (46250183790, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (73091584623, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (20569317845, 'ABLE_TO_VOTE');
-insert into elector (cpf, status) values (85740936251, 'ABLE_TO_VOTE');
+INSERT INTO client (client_id, name) VALUES
+(1, 'Google'),
+(2, 'Microsoft'),
+(3, 'Apple'),
+(4, 'Amazon'),
+(5, 'Meta');
 
+INSERT INTO professional (name, corporate_email, professional_status, phone, address_id, remuneration) VALUES
+('Sundar Pichai', 'sundar.pichai@google.com', 'NOT_ALLOCATED', '555-0101', 1, 2000.00),
+('Satya Nadella', 'satya.nadella@microsoft.com', 'NOT_ALLOCATED', '555-0102', 2, 2500.00),
+('Tim Cook', 'tim.cook@apple.com', 'NOT_ALLOCATED', '555-0103', 3, 3000.00),
+('Andy Jassy', 'andy.jassy@amazon.com', 'NOT_ALLOCATED', '555-0104', 4, 2200.00),
+('Mark Zuckerberg', 'mark.zuckerberg@meta.com', 'NOT_ALLOCATED', '555-0105', 5, 2300.00),
+('Jensen Huang', 'jensen.huang@nvidia.com', 'NOT_ALLOCATED', '555-0106', 6, 2100.00),
+('Lisa Su', 'lisa.su@amd.com', 'NOT_ALLOCATED', '555-0107', 7, 1900.00),
+('Daniel Zhang', 'daniel.zhang@alibaba.com', 'NOT_ALLOCATED', '555-0108', 8, 1800.00),
+('Arvind Krishna', 'arvind.krishna@ibm.com', 'NOT_ALLOCATED', '555-0109', 9, 2000.00),
+('Elon Musk', 'elon.musk@tesla.com', 'NOT_ALLOCATED', '555-0110', 10, 3500.00);
 
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '1' MINUTE, 'Você concorda em aprovar as contas do último mês?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '2' MINUTE, 'Você concorda em contratar um nselect * from vote;ovo serviço de limpeza para o condomínio?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '3' MINUTE, 'Você concorda em realizar obras de melhoria na área comum?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '4' MINUTE, 'Você concorda em aumentar o valor da taxa de condomínio?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '5' MINUTE, 'Você concorda em permitir a presença de animais de estimação no condomínio?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '6' MINUTE, 'Você concorda em proibir festas e eventos barulhentos após determinado horário?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '7' MINUTE, 'Você concorda em instalar câmeras de segurança nas áreas comuns?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '8' MINUTE, 'Você concorda em contratar um novo síndico para o condomínio?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '9' MINUTE, 'Você concorda em realizar uma reforma na fachada do prédio?', 'OPEN');
-insert into survey (end_time, question, status) values (CURRENT_TIMESTAMP + INTERVAL '10' MINUTE, 'Você concorda em implementar um sistema de coleta seletiva no condomínio?', 'OPEN');
+INSERT INTO address (country, state, city, street, number, complement, zipcode) VALUES
+('USA', 'California', 'Mountain View', 'Amphitheatre Parkway', '1600', NULL, '94043'),
+('USA', 'Washington', 'Redmond', 'Microsoft Way', '1', NULL, '98052'),
+('USA', 'California', 'Cupertino', 'Apple Park Way', '1', NULL, '95014'),
+('USA', 'Washington', 'Seattle', 'Amazon Way', '410 Terry Ave N', NULL, '98109'),
+('USA', 'California', 'Menlo Park', 'Willow Road', '1', NULL, '94025'),
+('USA', 'California', 'Santa Clara', 'Nvidia Road', '2788', NULL, '95051'),
+('USA', 'California', 'Santa Clara', 'AMD Street', '2485', NULL, '95054'),
+('China', 'Zhejiang', 'Hangzhou', 'Alibaba Ave', '969', NULL, '310000'),
+('USA', 'New York', 'Armonk', 'IBM Road', '1', NULL, '10504'),
+('USA', 'California', 'Palo Alto', 'Tesla Blvd', '3500 Deer Creek Road', NULL, '94304');
 
-insert into vote (approval, elector_id, survey_id) values (true, 1, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 1, 2);
-insert into vote (approval, elector_id, survey_id) values (false, 1, 3);
-insert into vote (approval, elector_id, survey_id) values (true, 1, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 2, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 2, 2);
-insert into vote (approval, elector_id, survey_id) values (true, 2, 3);
-insert into vote (approval, elector_id, survey_id) values (false, 2, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 2);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 3);
-insert into vote (approval, elector_id, survey_id) values (false, 3, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 4, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 4, 2);
-insert into vote (approval, elector_id, survey_id) values (false, 4, 3);
-insert into vote (approval, elector_id, survey_id) values (true, 4, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 2);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 3);
-insert into vote (approval, elector_id, survey_id) values (false, 5, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 6, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 6, 2);
-insert into vote (approval, elector_id, survey_id) values (true, 6, 3);
-insert into vote (approval, elector_id, survey_id) values (false, 6, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 2);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 3);
-insert into vote (approval, elector_id, survey_id) values (false, 7, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 8, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 8, 2);
-insert into vote (approval, elector_id, survey_id) values (true, 8, 3);
-insert into vote (approval, elector_id, survey_id) values (false, 8, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 2);
-insert into vote (approval, elector_id, survey_id) values (false, 9, 3);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 10, 1);
-insert into vote (approval, elector_id, survey_id) values (true, 10, 2);
-insert into vote (approval, elector_id, survey_id) values (true, 10, 3);
-insert into vote (approval, elector_id, survey_id) values (false, 10, 4);
-insert into vote (approval, elector_id, survey_id) values (true, 1, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 1, 6);
-insert into vote (approval, elector_id, survey_id) values (false, 1, 7);
-insert into vote (approval, elector_id, survey_id) values (true, 1, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 2, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 2, 6);
-insert into vote (approval, elector_id, survey_id) values (true, 2, 7);
-insert into vote (approval, elector_id, survey_id) values (false, 2, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 6);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 7);
-insert into vote (approval, elector_id, survey_id) values (false, 3, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 4, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 4, 6);
-insert into vote (approval, elector_id, survey_id) values (false, 4, 7);
-insert into vote (approval, elector_id, survey_id) values (true, 4, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 6);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 7);
-insert into vote (approval, elector_id, survey_id) values (false, 5, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 6, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 6, 6);
-insert into vote (approval, elector_id, survey_id) values (false, 6, 7);
-insert into vote (approval, elector_id, survey_id) values (true, 6, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 6);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 7);
-insert into vote (approval, elector_id, survey_id) values (false, 7, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 8, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 8, 6);
-insert into vote (approval, elector_id, survey_id) values (true, 8, 7);
-insert into vote (approval, elector_id, survey_id) values (false, 8, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 6);
-insert into vote (approval, elector_id, survey_id) values (false, 9, 7);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 10, 5);
-insert into vote (approval, elector_id, survey_id) values (true, 10, 6);
-insert into vote (approval, elector_id, survey_id) values (true, 10, 7);
-insert into vote (approval, elector_id, survey_id) values (false, 10, 8);
-insert into vote (approval, elector_id, survey_id) values (true, 1, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 1, 10);
-insert into vote (approval, elector_id, survey_id) values (false, 2, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 2, 10);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 3, 10);
-insert into vote (approval, elector_id, survey_id) values (false, 4, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 4, 10);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 5, 10);
-insert into vote (approval, elector_id, survey_id) values (false, 6, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 6, 10);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 7, 10);
-insert into vote (approval, elector_id, survey_id) values (false, 8, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 8, 10);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 9);
-insert into vote (approval, elector_id, survey_id) values (true, 9, 10);
-insert into vote (approval, elector_id, survey_id) values (false, 10, 9);

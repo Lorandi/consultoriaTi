@@ -1,7 +1,9 @@
 package com.consultoriaTi.gestao.service;
 
+import com.consultoriaTi.gestao.dto.DeallocationCreateDTO;
 import com.consultoriaTi.gestao.entity.Allocation;
 import com.consultoriaTi.gestao.entity.Professional;
+import com.consultoriaTi.gestao.enums.DeallocationReasonEnum;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +25,7 @@ import static com.consultoriaTi.gestao.enums.AllocationStatusEnum.FINISHED;
 public class ScheduledTaskService {
     private final AllocationService allocationService;
     private final ProfessionalService professionalService;
+    private final DeallocationService deallocationService;
 
     @PostConstruct
     public void executeTaskOnStartup() {
@@ -39,9 +42,11 @@ public class ScheduledTaskService {
         });
         List<Allocation> listAllocationsFinished = allocationService.findAllAllocationsToUpdateAllocationStatusTodayToFinished();
         listAllocationsFinished.forEach(allocation -> {
-            allocationService.saveAllocation(allocation.withAllocationStatus(FINISHED));
-            Professional professional = professionalService.findById(allocation.getProfessionalId());
-            allocationService.updateProfessionalStatusIfNoActiveAllocations(professional);
+            DeallocationCreateDTO deallocationCreateDTO = DeallocationCreateDTO.builder()
+                    .allocationId(allocation.getId())
+                    .deallocationReason(DeallocationReasonEnum.END_OF_ALLOCATION_PERIOD)
+                    .build();
+            deallocationService.create(deallocationCreateDTO);
         });
     }
 }
