@@ -90,7 +90,7 @@ public class AllocationResource {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Allocation by id",
-            responses = {@ApiResponse(responseCode = "204", description = "Elector successfully deleted")})
+            responses = {@ApiResponse(responseCode = "204", description = "Allocation successfully deleted")})
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
