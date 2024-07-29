@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -169,4 +170,11 @@ public class AllocationService {
         return repository.findAllAllocationWithStatusActiveForThisProfessional(professionalId);
     }
 
+    public Long countByAllocationStatus(AllocationStatusEnum allocationStatus) {
+        return repository.countByAllocationStatus(allocationStatus);
+    }
+
+    public BigDecimal calculateRevenue() {
+        return repository.calculateRevenue();
+    }
 }

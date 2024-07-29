@@ -18,7 +18,8 @@ public enum ErrorCodeEnum {
     ERROR_ALLOCATION_NOT_FOUND("error.allocation.not.found"),
     ERROR_ALLOCATION_NOT_FOUND_FOR_THIS_PROFESSIONAL("error.allocation.not.found.for.this.professional"),
     ERROR_DEALLOCATION_NOT_FOUND("error.deallocation.not.found"),
-    ERROR_ALLOCATION_STATUS_NOT_ACTIVE("error.allocation.status.not.active"),;
+    ERROR_ALLOCATION_STATUS_NOT_ACTIVE("error.allocation.status.not.active"),
+    ERROR_GENERATING_REPORT("error.generating.report"),;
 
     private final String messageKey;
 }

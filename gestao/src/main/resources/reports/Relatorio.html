@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <style>
+        h1,
+        h2,
+        h3,
+        h4 {
+            margin: 0;
+        }
+
+        body,
+        p,
+        h4 {
+            font-family: sans-serif;
+            font-size: 12pt;
+        }
+
+        .candidate-infos {
+            margin: 60px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            text-decoration: underline;
+            font-weight: bold;
+            font-size: 12pt;
+        }
+
+        .info-group {
+            margin: 10px 0;
+        }
+
+        .info-group span {
+            margin: 0 10px;
+        }
+
+        .technical-evaluation {
+            margin: 50px 0;
+        }
+
+        .footer {
+            position: running(footer);
+            color: #fe6e00;
+            text-decoration: none;
+        }
+
+        .logo {
+            position: running(logo);
+            width: 400px;
+            height: 130px;
+        }
+
+        .logo::before {
+            position: absolute;
+            bottom: 95px;
+            left: 98px;
+            content: '';
+            width: 400px;
+            height: 62px;
+            background-image: url('https://ifrs.edu.br/wp-content/themes/ifrs-portal-theme/img/ifrs.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .text {
+            text-align: justify;
+            margin-top: 10px;
+            white-space: pre-wrap;
+        }
+
+        @page {
+            margin: 3cm;
+            margin-top: 5cm;
+
+            @top-right-corner {
+                content: element(marcaDagua);
+            }
+
+            @top-center {
+                content: element(logo);
+            }
+
+            @bottom-center {
+                content: 'https://ifrs.edu.br/';
+                color: #fe6e00;
+                text-decoration: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<main>
+    <div class="logo"/>
+    <div class="marcaDagua"/>
+    <section>
+        <h2 class="section-title">Relatório da consultoria</h2>
+
+        <br>
+
+        <h3>Resumo contratações e alocações</h3>
+        <p class="info-group">
+            <strong>Total de profissionais:</strong>
+            ${totalProfessionals}
+        </p>
+        <p class="info-group">
+            <strong>Profissionais alocados:</strong>
+            ${professionalsAllocated}
+        </p>
+        <p class="info-group">
+            <strong>Profissionais não alocados:</strong>
+            ${professionalsNotAllocated}
+        </p>
+        <p class="info-group">
+            <strong>Total de alocações ativas:</strong>
+            ${totalActiveAllocations}
+        </p>
+        <p class="info-group">
+            <strong>Total de alocações agendadas:</strong>
+            ${totalScheduledAllocations}
+        </p>
+        <br>
+        <hr>
+        <br>
+        <h3>Resumo do relatório finceiro</h3>
+        <p class="info-group">
+            <strong>Receitas:</strong>
+            R$ ${revenue},00
+        </p>
+        <p class="info-group">
+            <strong>Despesas:</strong>
+            R$ ${expenses},00
+        </p>
+        <p class="info-group">
+            <strong>Lucro:</strong>
+            R$ ${profit},00
+        </p>
+    </section>
+</main>
+</body>
+</html>

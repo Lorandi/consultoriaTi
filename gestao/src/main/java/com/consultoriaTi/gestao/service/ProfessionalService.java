@@ -5,6 +5,7 @@ import com.consultoriaTi.gestao.dto.ProfessionalCreateDTO;
 import com.consultoriaTi.gestao.dto.ProfessionalDTO;
 import com.consultoriaTi.gestao.dto.ProfessionalUpdateDTO;
 import com.consultoriaTi.gestao.entity.Professional;
+import com.consultoriaTi.gestao.enums.AllocationStatusEnum;
 import com.consultoriaTi.gestao.enums.ProfessionalStatusEnum;
 import com.consultoriaTi.gestao.helper.JsonUtils;
 import com.consultoriaTi.gestao.helper.MessageHelper;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -115,5 +117,17 @@ public class ProfessionalService {
 
     public void save(final Professional professional) {
         repository.save(professional);
+    }
+
+    public Long count() {
+        return repository.count();
+    }
+
+    public Long countByProfessionalStatus(ProfessionalStatusEnum professionalStatus) {
+        return repository.countByProfessionalStatus(professionalStatus);
+    }
+
+    public BigDecimal calculateExpenses() {
+        return repository.calculateExpenses();
     }
 }
