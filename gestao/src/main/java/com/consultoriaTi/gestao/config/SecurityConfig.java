@@ -45,6 +45,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/allocation/**").hasAnyRole("ADMIN", "BUSINESS_PARTNER")
                         .requestMatchers(HttpMethod.DELETE, "/allocation/**").hasAnyRole("ADMIN", "BUSINESS_PARTNER")
 
+                        .requestMatchers(HttpMethod.POST, "/client/**").hasAnyRole("ADMIN", "BUSINESS_PARTNER")
+                        .requestMatchers(HttpMethod.PUT, "/client/**").hasAnyRole("ADMIN", "BUSINESS_PARTNER")
+                        .requestMatchers(HttpMethod.DELETE, "/client/**").hasAnyRole("ADMIN", "BUSINESS_PARTNER")
+
                         .requestMatchers(HttpMethod.POST, "/deallocation/**").hasAnyRole("ADMIN", "BUSINESS_PARTNER")
                         .requestMatchers(HttpMethod.DELETE, "/deallocation/**").hasAnyRole("ADMIN", "BUSINESS_PARTNER")
                         .anyRequest().authenticated())
