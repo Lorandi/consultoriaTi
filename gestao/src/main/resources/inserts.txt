@@ -1,9 +1,4 @@
-INSERT INTO client (client_id, name) VALUES
-(1, 'Google'),
-(2, 'Microsoft'),
-(3, 'Apple'),
-(4, 'Amazon'),
-(5, 'Meta');
+
 
 INSERT INTO professional (name, corporate_email, professional_status, phone, address_id, remuneration) VALUES
 ('Sundar Pichai', 'sundar.pichai@google.com', 'NOT_ALLOCATED', '555-0101', 1, 2000.00),

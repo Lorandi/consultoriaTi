@@ -4,7 +4,6 @@ import com.consultoriaTi.gestao.dto.AllocationCreateDTO;
 import com.consultoriaTi.gestao.dto.AllocationDTO;
 import com.consultoriaTi.gestao.dto.AllocationUpdateDTO;
 import com.consultoriaTi.gestao.entity.Allocation;
-import com.consultoriaTi.gestao.entity.Client;
 import com.consultoriaTi.gestao.entity.Professional;
 import com.consultoriaTi.gestao.enums.AllocationStatusEnum;
 import com.consultoriaTi.gestao.helper.MessageHelper;
@@ -12,16 +11,13 @@ import com.consultoriaTi.gestao.repository.AllocationRepository;
 import com.consultoriaTi.gestao.repository.spec.AllocationSpecification;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,9 +26,7 @@ import static com.consultoriaTi.gestao.enums.ProfessionalStatusEnum.ALLOCATED;
 import static com.consultoriaTi.gestao.enums.ProfessionalStatusEnum.NOT_ALLOCATED;
 import static com.consultoriaTi.gestao.exception.ErrorCodeEnum.*;
 import static com.consultoriaTi.gestao.util.mapper.MapperConstants.allocationMapper;
-import static java.lang.Boolean.FALSE;
 import static java.time.LocalDate.now;
-import static java.util.Objects.isNull;
 import static java.util.Objects.nonNull;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
@@ -51,7 +45,7 @@ public class AllocationService {
     @Transactional
     public AllocationDTO create(final AllocationCreateDTO createDTO) {
         Professional professional = professionalService.findById(createDTO.getProfessionalId());
-        clientService.findByClientId(createDTO.getClientId());
+        clientService.findById(createDTO.getClientId());
 
         checkProfessionalAllocations(createDTO.getProfessionalId(), createDTO.getClientId());
 
