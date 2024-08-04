@@ -1,18 +1,15 @@
 package com.consultoriaTi.gestao.dto;
 
-import lombok.Builder;
-import lombok.Value;
+import com.consultoriaTi.gestao.enums.ClientStatusEnum;
 import lombok.With;
-import lombok.extern.jackson.Jacksonized;
-
-import java.math.BigDecimal;
 
 @With
-@Value
-@Builder
-@Jacksonized
-public class ClientDTO {
+public record ClientDTO(Long clientId,
+                        String name,
+                        String phone,
+                        ClientStatusEnum clientStatus,
+                        String contactEmail,
+                        AddressDTO address) {}
 
-    Long clientId;
-    String name;
-}
+
+

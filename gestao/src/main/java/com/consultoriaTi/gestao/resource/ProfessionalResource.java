@@ -6,12 +6,12 @@ import com.consultoriaTi.gestao.dto.ProfessionalDTO;
 import com.consultoriaTi.gestao.dto.ProfessionalUpdateDTO;
 import com.consultoriaTi.gestao.enums.ProfessionalStatusEnum;
 import com.consultoriaTi.gestao.service.ProfessionalService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +26,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("/professional")
 @RequiredArgsConstructor
+@Tag(name = "Professional")
 public class ProfessionalResource {
 
     private final ProfessionalService service;
@@ -66,7 +67,7 @@ public class ProfessionalResource {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Professional by id",
-            responses = {@ApiResponse(responseCode = "204", description = "Elector successfully deleted")})
+            responses = {@ApiResponse(responseCode = "204", description = "Professional successfully deleted")})
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }

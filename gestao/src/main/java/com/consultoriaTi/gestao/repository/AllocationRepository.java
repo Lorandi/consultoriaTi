@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -28,4 +29,9 @@ public interface AllocationRepository extends JpaRepository<Allocation, Long>, J
 
     @Query(value = "select a from Allocation a where a.professionalId = ?1  and a.allocationStatus = 'ACTIVE' ")
     List<Allocation> findAllAllocationWithStatusActiveForThisProfessional(final Long professionalId);
+
+    Long countByAllocationStatus(AllocationStatusEnum allocationStatus);
+
+    @Query(value = "select sum(a.valuePerHour)*176 from Allocation a where a.allocationStatus = 'ACTIVE'")
+    BigDecimal calculateRevenue();
 }

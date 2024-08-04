@@ -12,6 +12,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @RestController
 @RequestMapping("/allocation")
 @RequiredArgsConstructor
+@Tag(name = "Allocation")
 public class AllocationResource {
 
     private final AllocationService service;
@@ -90,7 +92,7 @@ public class AllocationResource {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Allocation by id",
-            responses = {@ApiResponse(responseCode = "204", description = "Elector successfully deleted")})
+            responses = {@ApiResponse(responseCode = "204", description = "Allocation successfully deleted")})
     public void delete(@PathVariable Long id) {
         service.delete(id);
     }
