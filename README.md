@@ -1,6 +1,6 @@
 # Sistema de Outsourcing de TI
 
-Este repositório contém a documentação e os artefatos relacionados ao projeto de **Engenharia de Software II** desenvolvido por *João Fernando Hanzel Demetrio* e *Rodrigo Pedroso Lorandi*, como parte do curso de **Sistemas para Internet** do **IFRS - Campus Porto Alegre**.
+Este repositório contém a documentação e os artefatos relacionados ao projeto de **Engenharia de Software III** desenvolvido por *João Fernando Hanzel Demetrio* e *Rodrigo Pedroso Lorandi*, como parte do curso de **Sistemas para Internet** do **IFRS - Campus Porto Alegre**.
 
 ## Propósito do Documento
 
